@@ -1,0 +1,61 @@
+Training started
+Epoch 1/30, Loss: 2.9487, 
+Accuracy: 0.2186, Val Loss: 1.9802, Val Accuracy: 0.4248
+Epoch 2/30, Loss: 1.6056, 
+Accuracy: 0.5616, Val Loss: 1.4284, Val Accuracy: 0.6138
+Epoch 3/30, Loss: 1.0280, 
+Accuracy: 0.7128, Val Loss: 1.1864, Val Accuracy: 0.6924
+Epoch 4/30, Loss: 0.6509, 
+Accuracy: 0.8090, Val Loss: 1.2076, Val Accuracy: 0.7071
+Epoch 5/30, Loss: 0.4125, 
+Accuracy: 0.8841, Val Loss: 1.3711, Val Accuracy: 0.7017
+Epoch 6/30, Loss: 0.2911, 
+Accuracy: 0.9197, Val Loss: 1.3722, Val Accuracy: 0.7164
+Epoch 7/30, Loss: 0.1921, 
+Accuracy: 0.9497, Val Loss: 1.4619, Val Accuracy: 0.7150
+Epoch 8/30, Loss: 0.1417, 
+Accuracy: 0.9664, Val Loss: 1.5886, Val Accuracy: 0.7097
+Epoch 9/30, Loss: 0.1411, 
+Accuracy: 0.9636, Val Loss: 1.6132, Val Accuracy: 0.7177
+Epoch 10/30, Loss: 0.1278, 
+Accuracy: 0.9677, Val Loss: 1.7746, Val Accuracy: 0.7244
+Epoch 11/30, Loss: 0.1289, 
+Accuracy: 0.9704, Val Loss: 1.5700, Val Accuracy: 0.7284
+Epoch 12/30, Loss: 0.1000, 
+Accuracy: 0.9766, Val Loss: 1.5699, Val Accuracy: 0.7190
+Epoch 13/30, Loss: 0.0865, 
+Accuracy: 0.9765, Val Loss: 1.6579, Val Accuracy: 0.7270
+Epoch 14/30, Loss: 0.0809, 
+Accuracy: 0.9782, Val Loss: 1.6414, Val Accuracy: 0.7297
+Epoch 15/30, Loss: 0.0844, 
+Accuracy: 0.9766, Val Loss: 1.6142, Val Accuracy: 0.7217
+Epoch 16/30, Loss: 0.0773, 
+Accuracy: 0.9799, Val Loss: 1.5967, Val Accuracy: 0.7257
+Epoch 17/30, Loss: 0.0651, 
+Accuracy: 0.9833, Val Loss: 1.8010, Val Accuracy: 0.7337
+Epoch 18/30, Loss: 0.0547, 
+Accuracy: 0.9859, Val Loss: 1.8150, Val Accuracy: 0.7284
+Epoch 19/30, Loss: 0.0615, 
+Accuracy: 0.9825, Val Loss: 1.6334, Val Accuracy: 0.7337
+Epoch 20/30, Loss: 0.0598, 
+Accuracy: 0.9839, Val Loss: 1.6525, Val Accuracy: 0.7430
+Epoch 21/30, Loss: 0.0661, 
+Accuracy: 0.9836, Val Loss: 1.7544, Val Accuracy: 0.7230
+Epoch 22/30, Loss: 0.0618, 
+Accuracy: 0.9848, Val Loss: 1.8295, Val Accuracy: 0.7257
+Epoch 23/30, Loss: 0.0488, 
+Accuracy: 0.9876, Val Loss: 1.9101, Val Accuracy: 0.7204
+Epoch 24/30, Loss: 0.0798, 
+Accuracy: 0.9819, Val Loss: 1.7599, Val Accuracy: 0.7217
+Epoch 25/30, Loss: 0.0562, 
+Accuracy: 0.9836, Val Loss: 1.8329, Val Accuracy: 0.7350
+Epoch 26/30, Loss: 0.0709, 
+Accuracy: 0.9851, Val Loss: 1.9469, Val Accuracy: 0.7084
+Epoch 27/30, Loss: 0.0615, 
+Accuracy: 0.9845, Val Loss: 1.7287, Val Accuracy: 0.7217
+Epoch 28/30, Loss: 0.0428, 
+Accuracy: 0.9886, Val Loss: 1.8326, Val Accuracy: 0.7364
+Epoch 29/30, Loss: 0.0526, 
+Accuracy: 0.9868, Val Loss: 1.6128, Val Accuracy: 0.7257
+Epoch 30/30, Loss: 0.0400, 
+Accuracy: 0.9895, Val Loss: 1.6802, Val Accuracy: 0.7284
