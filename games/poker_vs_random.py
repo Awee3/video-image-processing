@@ -8,7 +8,9 @@ import logging
 import random
 from itertools import combinations
 from collections import Counter
+from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 pygame.init()
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 1600, 900
@@ -16,9 +18,9 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("POKER")
 
 MAIN_MENU = pygame.transform.scale(pygame.image.load(
-    os.path.join('assets', 'bg3.png')), (SCREEN_WIDTH, SCREEN_HEIGHT))
+    PROJECT_ROOT / 'assets' / 'poker-menu.png'), (SCREEN_WIDTH, SCREEN_HEIGHT))
 GAME_BG = pygame.transform.scale(pygame.image.load(
-    os.path.join('assets', 'bg1.png')), (SCREEN_WIDTH, SCREEN_HEIGHT))
+    PROJECT_ROOT / 'assets' / 'table.png'), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -217,11 +219,11 @@ player2_images = []
 def detect_card(screen):
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     tf.get_logger().setLevel(logging.FATAL)
-    class_mapping_file = 'model/class_mapping.txt'
+    class_mapping_file = PROJECT_ROOT / 'model' / 'class_mapping.txt'
     class_names = load_class_mapping(class_mapping_file)
-    model = tf.keras.models.load_model('model/cnn_model_v7.h5')
+    model = tf.keras.models.load_model(PROJECT_ROOT / 'model' / 'cnn_model_v7.h5', compile=False)
     
-    cap = cv2.VideoCapture(2)
+    cap = cv2.VideoCapture(int(os.getenv('CARD_CAMERA_INDEX', '2')))
     frame_width = 100
     frame_height = 200
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
@@ -288,7 +290,7 @@ def detect_card(screen):
                         predicted_card = predictions[-1]
                         print("Hasil prediksi disimpan:", predicted_card) 
                         try:
-                            image_path = os.path.join('images', f"{predicted_card}.jpg")
+                            image_path = PROJECT_ROOT / 'assets' / 'cards' / f"{predicted_card}.jpg"
                             prediction_image = pygame.image.load(image_path)
                             print(f"Gambar '{image_path}' dimuat.")
                             
@@ -320,7 +322,7 @@ def deal_cards_for_player2():
     # save gambar kartu player2
     for card in player2_cards:
         try:
-            image_path = os.path.join('images', f"{card}.jpg")
+            image_path = PROJECT_ROOT / 'assets' / 'cards' / f"{card}.jpg"
             prediction_image = pygame.image.load(image_path)
             player2_images.append(prediction_image)
             player2_deck.append(card)

@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 import os
 import tensorflow as tf
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 # Function to load class name mapping
 def load_class_mapping(mapping_file):
@@ -17,12 +20,12 @@ def load_class_mapping(mapping_file):
         return None
 
 def detect_card():
-    class_mapping_file = 'model/class_mapping.txt'
+    class_mapping_file = PROJECT_ROOT / 'model' / 'class_mapping.txt'
     class_names = load_class_mapping(class_mapping_file)
 
-    model = tf.keras.models.load_model('model/cnn_model_v5.h5')
+    model = tf.keras.models.load_model(PROJECT_ROOT / 'model' / 'cnn_model_v5.h5', compile=False)
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(int(os.getenv('CARD_CAMERA_INDEX', '0')))
 
     while True:
         ret, frame = cap.read()

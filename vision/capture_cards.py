@@ -4,6 +4,7 @@ import os
 import time
 import threading
 from tkinter import Tk, Button
+from pathlib import Path
 
 def start_saving_images():
     global saving_images, start_time, last_save_time
@@ -14,15 +15,14 @@ def start_saving_images():
 
 def run_opencv():
     global saving_images, start_time, last_save_time
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(int(os.getenv('CARD_CAMERA_INDEX', '0')))
 
     if not cap.isOpened():
         print("Tidak dapat mengakses kamera")
         return
     
-    output_folder = "dataset"
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+    output_folder = Path(__file__).resolve().parents[1] / "captures"
+    output_folder.mkdir(exist_ok=True)
 
     image_index = 0
     saving_images = False  # Flag untuk menentukan apakah gambar sedang disimpan

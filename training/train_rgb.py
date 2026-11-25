@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import layers, models
-import os
+from pathlib import Path
 
 # Parameters
 img_height = 128  # Height of the images for resizing
@@ -10,7 +10,10 @@ batch_size = 32   # Number of images per batch
 epochs = 50       # Number of training epochs
 
 # Load and preprocess the dataset
-data_dir = 'dataset_kaggle'  # Path to your dataset folder
+training_dir = Path(__file__).resolve().parent
+data_dir = training_dir.parent / 'dataset_kaggle'
+run_dir = training_dir / 'runs' / 'rgb'
+run_dir.mkdir(parents=True, exist_ok=True)
 
 train_datagen = ImageDataGenerator(
     rescale=1.0 / 255,
@@ -35,7 +38,7 @@ validation_generator = train_datagen.flow_from_directory(
 
 # Generate class mapping
 class_indices = train_generator.class_indices  # Get class indices
-class_mapping_file_path = 'model/class_mapping.txt'  # Path to save the mapping file
+class_mapping_file_path = run_dir / 'class_mapping.txt'
 
 with open(class_mapping_file_path, 'w') as f:
     for class_name, class_index in class_indices.items():
@@ -70,8 +73,8 @@ history = model.fit(
 )
 
 # Save the trained model
-model.save('model/cnn_model_v8.h5')
-print("Model saved as cnn_model_v8.h5")
+model.save(run_dir / 'cnn_model_v8.h5')
+print(f"Model saved in {run_dir}")
 
 # Optional: plot training and validation accuracy
 import matplotlib.pyplot as plt

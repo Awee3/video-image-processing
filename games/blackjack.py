@@ -4,7 +4,9 @@ import os
 import cv2
 import tensorflow as tf
 import numpy as np
+from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 pygame.init()
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 1430, 953
@@ -12,9 +14,9 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Main Menu")
 
 MAIN_MENU = pygame.transform.scale(pygame.image.load(
-    os.path.join('assets', 'bg2.png')), (SCREEN_WIDTH, SCREEN_HEIGHT))
+    PROJECT_ROOT / 'assets' / 'blackjack-menu.png'), (SCREEN_WIDTH, SCREEN_HEIGHT))
 GAME_BG = pygame.transform.scale(pygame.image.load(
-    os.path.join('assets', 'bg1.png')), (SCREEN_WIDTH, SCREEN_HEIGHT))
+    PROJECT_ROOT / 'assets' / 'table.png'), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -179,12 +181,12 @@ def deal_card():
     card_index = (card_index + 1) % len(card_order) 
 
 def detect_card(card_owner):
-    class_mapping_file = 'model/class_mapping.txt'
+    class_mapping_file = PROJECT_ROOT / 'model' / 'class_mapping.txt'
     class_names = load_class_mapping(class_mapping_file)
 
-    model = tf.keras.models.load_model('model/cnn_model_v7.h5')
+    model = tf.keras.models.load_model(PROJECT_ROOT / 'model' / 'cnn_model_v7.h5', compile=False)
  
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(int(os.getenv('CARD_CAMERA_INDEX', '1')))
     predictions = []
     prediction_image = None
     while True:
@@ -235,7 +237,7 @@ def detect_card(card_owner):
                 predicted_card = predictions[-1]
                 print("Hasil prediksi disimpan:", predictions[-1]) 
                 try:
-                    image_path = os.path.join('images', f"{predictions[-1]}.jpg")
+                    image_path = PROJECT_ROOT / 'assets' / 'cards' / f"{predictions[-1]}.jpg"
                     prediction_image = pygame.image.load(image_path)
                     print(f"Gambar '{image_path}' dimuat.")
                     

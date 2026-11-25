@@ -4,10 +4,14 @@ import matplotlib.pyplot as plt
 import os
 import cv2
 import random
+from pathlib import Path
 
 
-TRAIN_DIR = r"C:\Users\wildan\OneDrive\Documents\COLLEGE\SEMESTER 5\Pengolahan Citra Video\projek\dataset_kaggle"
-LOG_FILE = "training_status.log"
+training_dir = Path(__file__).resolve().parent
+TRAIN_DIR = training_dir.parent / "dataset_kaggle"
+RUN_DIR = training_dir / "runs" / "grayscale"
+RUN_DIR.mkdir(parents=True, exist_ok=True)
+LOG_FILE = RUN_DIR / "training_status.log"
 
 with open(LOG_FILE, "w") as f:
     f.write("Training started\n")
@@ -21,16 +25,18 @@ class TrainingLogger(tf.keras.callbacks.Callback):
                     f"Val Loss: {logs['val_loss']:.4f}, "
                     f"Val Accuracy: {logs['val_accuracy']:.4f}\n")
             
-tsb = tf.keras.callbacks.TensorBoard(log_dir="logs")
+tsb = tf.keras.callbacks.TensorBoard(log_dir=str(RUN_DIR / "tensorboard"))
 
 
-classes = [i for i in os.listdir(TRAIN_DIR) if os.path.isdir(os.path.join(TRAIN_DIR, i))]
+classes = sorted(folder.name for folder in TRAIN_DIR.iterdir() if folder.is_dir())
+with (RUN_DIR / "class_mapping.txt").open("w") as f:
+    for index, name in enumerate(classes):
+        f.write(f"{index}: {name}\n")
 
 
 train = []
-for i in classes:
+for current_class, i in enumerate(classes):
     current_path = os.path.join(TRAIN_DIR, i)
-    current_class = classes.index(i)
     for j in os.listdir(current_path):
         try:
             img_path = os.path.join(current_path, j)
@@ -106,4 +112,4 @@ plt.legend(["Train", "Validation"], loc="best")
 plt.show()
 
 
-model.save("64x3-cards.h5")
+model.save(RUN_DIR / "64x3-cards.h5")
