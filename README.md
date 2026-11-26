@@ -6,6 +6,8 @@ Play two-player Texas Hold’em with a physical deck and a webcam. OpenCV finds 
 
 *The detector reads the queen of hearts shown on the flop. This sample hand replays bundled card images through the game’s camera input.*
 
+Full Video Demo : https://youtu.be/qC1UwBvXfLo
+
 ## Play your first hand
 
 You’ll need 64-bit Python 3.11, a webcam, a deck of cards, and a plain blue surface. The trained models are included.
